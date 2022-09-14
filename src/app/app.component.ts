@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,10 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angula
 })
 export class AppComponent {
   title = 'ejemplo-forms';
+  //form control
+  //prueba = new FormControl("soy un control");
 
+  //formgroup
   public formLogin: FormGroup; //primero se crea una variabnle publica y se le asigna el tipo formgroup. sera la variable que llamemos en el html
 
   constructor(
@@ -27,6 +30,8 @@ export class AppComponent {
       terms: ['', [Validators.required, Validators.requiredTrue]]
     });
     this.loadApi();
+
+
   }
 
 
@@ -51,4 +56,5 @@ export class AppComponent {
   send(): any {
     console.log(this.formLogin.value); //toma la informacion del fomulario y la imprime en consola
   }
+
 }

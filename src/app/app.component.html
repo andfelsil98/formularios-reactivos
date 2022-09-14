@@ -1,3 +1,5 @@
+
+<!--FORM GROUP-->
 <div>
   <!-- pongo el propertybiding formgroup y el nombre del formularia que le quiera poner, este nombre sera con el que yo trabaje en el ts y contruya el grupo de inputs -->
   <form [formGroup]="formLogin" (submit)="send()" action="">
@@ -5,7 +7,7 @@
     <div>
       <label for="email">Email</label>
       <!-- el formcontrolname es la propiedad con la cual se va a identificar este input en el ts cuando se hace el formbuilder, es decir deben llamarse igual  -->
-    <input id="email" formControlName="email" type="text">
+    <input id="email"  formControlName="email" type="text">
 
     </div>
     <div>
@@ -30,3 +32,7 @@
   <p> Valido: {{ formLogin.valid | json }}</p>
 
 </div>
+
+<!-- <app-platziforms></app-platziforms> -->
+<app-formgroup></app-formgroup>
+

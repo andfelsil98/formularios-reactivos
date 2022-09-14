@@ -1,0 +1,119 @@
+<!--FORM CONTROL-->
+
+<p>
+  <!--de esta forma ya esta atado el input a la variable que esta declarada en typescript-->
+  <!--usamos clases dinamicas para que exista la clase si ambas condiciones se cumplen en este caso si el campo es valido y si es usuario toco el campo estas clases se crean para manipular el css y dado unos eventos en el input se cambie de color a verde o a rojo-->
+  <input
+  [class.is-valid]="isNameFieldValid"
+  [class.is-invalid]="isNameFieldInValid"
+  type="text"
+  [formControl]="nameField">
+  Name:{{ nameField.valid }}
+  <!--boton para obtener el valor del input, ejecuta la funcion que toma dicho valor-->
+  <br>
+  <button [disabled]="nameField.invalid" (click)="getNameValue()">Get value</button>
+  <!--codigo para imprimir el contenido de los objetos que se crean con el form control dandole un formato json y organizando la informacion con la etiqueta code y pre-->
+  <!--<code>
+    <pre>
+      {{ nameField | json}}
+    </pre>
+  </code> -->
+</p>
+
+<div class="messages" [class.active]="isNameFieldInValid">
+
+  <p>
+    <!-- en este parrafo estoy poniendo una condicion que pregunta si name.field tiene un error en la validacion llamada require si si o sino eso devuelve un true o un false adicionalmente uso la propiedad touched que lo que me indica es si el usuario ya toco el input en este caso si lo toco y no lo modifico va a mostarme el mensaje de que el campo es requerido -->
+    <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
+  </p>
+  <p>
+    <!-- importante tener en cuenta que toda validacion que se haga en el html debe ir todo en minuscula asi en el ts tenga alguna mayuscula -->
+    <strong *ngIf="nameField.hasError('maxlength')">Debe tener maximo 10 caracteres</strong>
+  </p>
+
+</div>
+
+<p>
+  <input type="email" [formControl]="emailField">
+  Email: {{ emailField.value }}
+</p>
+<p>
+  <input type="tel" [formControl]="phoneField">
+  Telefono: {{ phoneField.value }}
+</p>
+<p>
+  <input type="color" [formControl]="colorField">
+  Color: {{ colorField.value }}
+</p>
+<p>
+  <input type="date" [formControl]="dateField">
+  Fecha: {{ dateField.value }}
+</p>
+<p>
+  <input type="number" [formControl]="ageField">
+  Edad: {{ ageField.value }}
+</p>
+<p>
+  <input type="range" [formControl]="rangeField">
+  Rango: {{ rangeField.value }}
+</p>
+<!--uso del formcontrol para tomar el valor de cualquiera de las opciones que se seleccione (biding selects)-->
+<p>
+  Categoria: {{ categoryField.value }}
+  <select [formControl]="categoryField">
+    <option value="category-1">Category 1</option>
+    <option value="category-2">Category 2</option>
+    <option value="category-3">Category 3</option>
+    <option value="category-4">Category 4</option>
+  </select>
+</p>
+
+<!--selects multiples -->
+<p>
+  Tags: {{ tagField.value }}
+  <select [formControl]="tagField" multiple>
+    <option value="tag-1">Tag 1</option>
+    <option value="tag-2">Tag 2</option>
+    <option value="tag-3">Tag 3</option>
+    <option value="tag-4">Tag 4</option>
+  </select>
+</p>
+<!--input de tipo checkbox este devuelve un true o false-->
+<p>
+  <input type="checkbox" [formControl]="agreeField">
+  ¿esta de acuerdo?: {{ agreeField.value }}
+</p>
+
+<!--input de tipo radio a este toca añadirle la propiedad value ya que cuando se seleccione sera el elemento que se guarde en la variable de ts-->
+<p>
+  <label >
+    <input name="gender" type="radio" value="male" [formControl]="genderField">
+    Masculino
+  </label>
+  <label >
+    <input name="gender" type="radio" value="female" [formControl]="genderField">
+    Femenino
+  </label>
+  <label >
+    <input name="gender" type="radio" value="other" [formControl]="genderField">
+    Otro
+  </label>
+  Genero: {{ genderField.value }}
+</p>
+
+<!--Hay un conflicto cuando tengo mas de un grupo de radios y es que entre ellos son excluyentes asi no tengan nada que ver unos con los otros por tanto hay que ponerles la propiedad name para identificar a que grupo pertenece cada radio-->
+<p>
+  <label >
+    <input name="zone" type="radio" value="zone-1" [formControl]="zoneField">
+    Zona 1
+  </label>
+  <label >
+    <input name="zone" type="radio" value="zone-2" [formControl]="zoneField">
+    Zona 2
+  </label>
+  <label >
+    <input name="zone" type="radio" value="zone-3" [formControl]="zoneField">
+    Zona 3
+  </label>
+  Genero: {{ zoneField.value }}
+</p>
